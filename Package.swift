@@ -12,7 +12,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/vapor/vapor.git", .upToNextMajor(from: "3.0.0")),
-        .package(url: "https://github.com/GraphQLSwift/GraphQL.git", .upToNextMajor(from: "0.5.0"))
+        .package(url: "https://github.com/noahemmet/GraphQL.git", .branch("swift-42")),
     ],
     targets: [
         .target(

@@ -40,31 +40,54 @@ public struct HTTPGraphQL: GraphQLService {
     if executionRequest.query == "" && executionRequest.variables.isEmpty && self.enableIntrospection {
       return self.executeIntrospectionQuery(for: req)
     }
-    let promise = req.eventLoop.newPromise(Map.self);
-    self.dispatchQueue.async {
+//    let promise = req.eventLoop.newPromise(Map.self);
+//    self.dispatchQueue.async {
       do {
         let (schema, rootValue, context) = try self.executionContextProvider(req)
-        promise.succeed(result: try graphql(
-          queryStrategy: ConcurrentDispatchFieldExecutionStrategy(dispatchQueue: self.dispatchQueue),
-          subscriptionStrategy: ConcurrentDispatchFieldExecutionStrategy(dispatchQueue: self.dispatchQueue),
-          schema: schema,
-          request: executionRequest.query,
-          rootValue: rootValue,
-          contextValue: context,
-          variableValues: executionRequest.variables,
-          operationName: executionRequest.operationName)
-        )
+        let result = try graphql(
+//            queryStrategy: <#T##QueryFieldExecutionStrategy#>, 
+//                    mutationStrategy: <#T##MutationFieldExecutionStrategy#>, 
+//                    subscriptionStrategy: <#T##SubscriptionFieldExecutionStrategy#>, 
+//                    instrumentation: <#T##Instrumentation#>, 
+                    schema: schema, 
+                    request: executionRequest.query, 
+                    rootValue: rootValue, 
+                    context: context, 
+                    eventLoopGroup: req, 
+                    variableValues: executionRequest.variables, 
+                    operationName: executionRequest.operationName)
+        return result
+//        promise.succeed(result: result)
+//        promise.succeed(result: try graphql(
+//          queryStrategy: ConcurrentDispatchFieldExecutionStrategy(dispatchQueue: self.dispatchQueue),
+//          subscriptionStrategy: ConcurrentDispatchFieldExecutionStrategy(dispatchQueue: self.dispatchQueue),
+//          schema: schema,
+//          request: executionRequest.query,
+//          rootValue: rootValue,
+//          context: context,
+//          variableValues: executionRequest.variables,
+//          operationName: executionRequest.operationName)
+//        )
       } catch let e as GraphQLError {
-        promise.succeed(result: [
-          "data": [
-            "errors": [e.map]
-          ]
-        ])
+        let graphQLError: [String: Map] = [
+                  "data": [
+                    "errors": [e.map]
+                  ]
+                ]
+        let map = Map.dictionary(graphQLError)
+        return req.future(map)
+//        promise.succeed(result: [
+//          "data": [
+//            "errors": [e.map]
+//          ]
+//        ])
       } catch let e {
-        promise.fail(error: e)
+        fatalError("\(e)")
+//        return req.future(Map.
+//        promise.fail(error: e)
       }
-    }
-    return promise.futureResult
+//    }
+//    return promise.futureResult
   }
   
 }
