@@ -13,6 +13,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/vapor/vapor.git", .upToNextMajor(from: "3.0.0")),
         .package(url: "https://github.com/noahemmet/GraphQL.git", .branch("swift-42")),
+        .package(url: "https://github.com/noahemmet/Graphiti.git", .branch("swift-42")),
     ],
     targets: [
         .target(
