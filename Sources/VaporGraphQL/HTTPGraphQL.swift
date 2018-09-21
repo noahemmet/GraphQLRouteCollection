@@ -1,5 +1,6 @@
 import Vapor
 import GraphQL
+import Graphiti
 
 public typealias ExecutionContext = (
   schema: GraphQLSchema,
@@ -19,21 +20,12 @@ public struct HTTPGraphQL: GraphQLService {
   /// given an empty query.
   public let enableIntrospection: Bool
   
-  /// Moves the graphql execution to a separate thread so the NIO event loop
-  /// isn't blocked.
-  private  let dispatchQueue: DispatchQueue
-  
   public init(
     enableIntrospection: Bool = true,
     executionContextProvider: @escaping ExecutionContextProvider)
   {
     self.executionContextProvider = executionContextProvider
     self.enableIntrospection = enableIntrospection
-    self.dispatchQueue = DispatchQueue(
-      label: "HTTP GraphQL Execution Queue",
-      qos: .userInitiated,
-      attributes: .concurrent
-    )
   }
   
   public func execute(_ executionRequest: GraphQLExecutionRequest, for req: Request) -> Future<Map> {

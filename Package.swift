@@ -18,7 +18,7 @@ let package = Package(
     targets: [
         .target(
             name: "VaporGraphQL",
-            dependencies: ["Vapor", "GraphQL"]),
+            dependencies: ["Vapor", "GraphQL", "Graphiti"]),
         .testTarget(
             name: "VaporGraphQLTests",
             dependencies: ["VaporGraphQL"]),

@@ -38,6 +38,15 @@
         }
       },
       {
+        "package": "Graphiti",
+        "repositoryURL": "https://github.com/noahemmet/Graphiti.git",
+        "state": {
+          "branch": "swift-42",
+          "revision": "693e2a0f3b0967bf13b3812f01e5614aabbb7201",
+          "version": null
+        }
+      },
+      {
         "package": "GraphQL",
         "repositoryURL": "https://github.com/noahemmet/GraphQL.git",
         "state": {
