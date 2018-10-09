@@ -9,6 +9,9 @@ let package = Package(
         .library(
             name: "VaporGraphQL",
             targets: ["VaporGraphQL"]),
+        .library(
+            name: "StarWars",
+            targets: ["StarWars"]),
         .executable(
             name: "VaporGraphQLExample",
             targets: ["Example"])
@@ -22,11 +25,14 @@ let package = Package(
         .target(
             name: "VaporGraphQL",
             dependencies: ["Vapor", "GraphQL", "Graphiti"]),
-        .testTarget(
-            name: "VaporGraphQLTests",
-            dependencies: ["VaporGraphQL"]),
+        .target(
+            name: "StarWars",
+            dependencies: ["Vapor", "GraphQL", "Graphiti"]),
         .target(
             name: "Example",
-            dependencies: ["VaporGraphQL", "Vapor", "GraphQL", "Graphiti"]),
+            dependencies: ["VaporGraphQL", "StarWars", "Vapor", "GraphQL", "Graphiti"]),
+        .testTarget(
+            name: "VaporGraphQLTests",
+            dependencies: ["VaporGraphQL", "StarWars"]),
     ]
 )

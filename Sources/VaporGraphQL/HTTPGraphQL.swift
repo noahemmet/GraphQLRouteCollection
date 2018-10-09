@@ -12,6 +12,14 @@ public typealias ExecutionContext = (
 public typealias ExecutionContextProvider = (Request) throws -> ExecutionContext
 
 public struct HTTPGraphQL: GraphQLService {
+    public var serviceType: Any.Type { fatalError() }
+    
+    public var serviceSupports: [Any.Type] { fatalError() }
+    
+    public func makeService(for worker: Container) throws -> Any {
+        fatalError()
+    }
+    
   
   /// Provides the schema based off the given request.
   public let executionContextProvider: ExecutionContextProvider
