@@ -169,8 +169,9 @@ let HumanType = try! GraphQLObjectType(
             type: GraphQLList(CharacterInterface),
             description: "The friends of the human, or an empty list if they " +
             "have none.",
-            resolve: { human, _, _, _ in
-                return getFriends(character: human as! Human)
+            resolve: { human, _, _, eventLoopGroup, _ in
+                let friends = getFriends(character: human as! Human)
+                return eventLoopGroup.next().newSucceededFuture(result: friends)
             }
         ),
         "appearsIn": GraphQLField(
@@ -184,7 +185,7 @@ let HumanType = try! GraphQLObjectType(
         "secretBackstory": GraphQLField(
             type: GraphQLString,
             description: "Where are they from and how they came to be who they are.",
-            resolve: { _, _, _, _ in
+            resolve: { _, _, _, _, _ in
                 struct Secret : Error, CustomStringConvertible {
                     let description: String
                 }
@@ -228,8 +229,9 @@ let DroidType = try! GraphQLObjectType(
         "friends": GraphQLField(
             type: GraphQLList(CharacterInterface),
             description: "The friends of the droid, or an empty list if they have none.",
-            resolve: { droid, _, _, _ in
-                return getFriends(character: droid as! Droid)
+            resolve: { droid, _, _, eventLoopGroup, _ in
+                let friends = getFriends(character: droid as! Droid)
+                return eventLoopGroup.next().newSucceededFuture(result: friends)
             }
         ),
         "appearsIn": GraphQLField(
@@ -239,7 +241,7 @@ let DroidType = try! GraphQLObjectType(
         "secretBackstory": GraphQLField(
             type: GraphQLString,
             description: "Construction date and the name of the designer.",
-            resolve: { _, _, _, _ in
+            resolve: { _, _, _, _, _ in
                 struct Secret : Error, CustomStringConvertible {
                     let description: String
                 }
@@ -276,6 +278,7 @@ let DroidType = try! GraphQLObjectType(
 let QueryType = try! GraphQLObjectType(
     name: "Query",
     fields: [
+        
         "hero": GraphQLField(
             type: CharacterInterface,
             args: [
@@ -286,11 +289,10 @@ let QueryType = try! GraphQLObjectType(
                     "provided, returns the hero of that particular episode."
                 )
             ],
-            resolve: resolveWithFuture { (source: Any, arguments: Map, context: Request) -> Future<Character?> in
-              return context.eventLoop.submit {
+            resolve: { source, arguments, _, eventLoopGroup, _ in
                 let episode = Episode(arguments["episode"].string)
-                return getHero(episode: episode)
-              }
+                let hero = getHero(episode: episode)
+                return eventLoopGroup.next().newSucceededFuture(result: hero)
             }
         ),
         "human": GraphQLField(
@@ -301,8 +303,9 @@ let QueryType = try! GraphQLObjectType(
                     description: "id of the human"
                 )
             ],
-            resolve: resolveWithFuture { (source: Any, arguments: Map, context: Request) -> Future<Human?> in
-              return context.eventLoop.submit { getHuman(id: arguments["id"].string!) }
+            resolve: { source, arguments, _, eventLoopGroup, _ in
+                let human = getHuman(id: arguments["id"].string!)
+                return eventLoopGroup.next().newSucceededFuture(result: human)
             }
         ),
         "droid": GraphQLField(
@@ -313,9 +316,10 @@ let QueryType = try! GraphQLObjectType(
                     description: "id of the droid"
                 )
             ],
-            resolve: resolveWithFuture { (source: Any, arguments: Map, context: Request) -> Future<Droid?> in
-              return context.eventLoop.submit { getDroid(id: arguments["id"].string!) }
-            }
+            resolve: { source, arguments, _, eventLoopGroup, _ in
+                let droid = getDroid(id: arguments["id"].string!)
+                return eventLoopGroup.next().newSucceededFuture(result: droid)
+        }
         ),
     ]
 )
