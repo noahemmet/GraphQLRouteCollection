@@ -3,7 +3,7 @@ import GraphQL
 
 /// Protocol for services that can execute graphql queries from vapor requests. This protocol exists
 /// to allow testing with mock services. For actual use, see HTTPGraphQL.
-public protocol GraphQLService: ServiceFactory {
+public protocol GraphQLService: Service {
   
   /// Execute a graphql request.
   func execute(_ executionRequest: GraphQLExecutionRequest, for req: Request) -> Future<Map>

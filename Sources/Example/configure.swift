@@ -1,10 +1,17 @@
 import Vapor
 import VaporGraphQL
+import StarWars
 
 /// Called before your application initializes.
 public func configure(_ config: inout Config, _ env: inout Vapor.Environment, _ services: inout Services) throws {
-    
-//    services.register(GraphQLService.self as! ServiceFactory)
+    let httpGraphQL = HTTPGraphQL { req -> ExecutionContext in
+        return (
+            schema: starWarsSchema,
+            rootValue: Void(),
+            context: Void()
+        )
+    }
+    services.register(httpGraphQL, as: GraphQLService.self)
     
     /// Register routes to the router
     let router = EngineRouter.default()
