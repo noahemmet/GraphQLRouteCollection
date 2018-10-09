@@ -13,7 +13,7 @@ let package = Package(
             name: "StarWars",
             targets: ["StarWars"]),
         .executable(
-            name: "VaporGraphQLExample",
+            name: "Example",
             targets: ["Example"])
     ],
     dependencies: [
