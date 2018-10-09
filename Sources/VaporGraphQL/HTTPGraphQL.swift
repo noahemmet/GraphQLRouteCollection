@@ -12,14 +12,6 @@ public typealias ExecutionContext = (
 public typealias ExecutionContextProvider = (Request) throws -> ExecutionContext
 
 public struct HTTPGraphQL: GraphQLService {
-    public var serviceType: Any.Type { fatalError() }
-    
-    public var serviceSupports: [Any.Type] { fatalError() }
-    
-    public func makeService(for worker: Container) throws -> Any {
-        fatalError()
-    }
-    
   
   /// Provides the schema based off the given request.
   public let executionContextProvider: ExecutionContextProvider
@@ -40,15 +32,9 @@ public struct HTTPGraphQL: GraphQLService {
     if executionRequest.query == "" && executionRequest.variables.isEmpty && self.enableIntrospection {
       return self.executeIntrospectionQuery(for: req)
     }
-//    let promise = req.eventLoop.newPromise(Map.self);
-//    self.dispatchQueue.async {
       do {
         let (schema, rootValue, context) = try self.executionContextProvider(req)
         let result = try graphql(
-//            queryStrategy: <#T##QueryFieldExecutionStrategy#>, 
-//                    mutationStrategy: <#T##MutationFieldExecutionStrategy#>, 
-//                    subscriptionStrategy: <#T##SubscriptionFieldExecutionStrategy#>, 
-//                    instrumentation: <#T##Instrumentation#>, 
                     schema: schema, 
                     request: executionRequest.query, 
                     rootValue: rootValue, 
@@ -57,17 +43,6 @@ public struct HTTPGraphQL: GraphQLService {
                     variableValues: executionRequest.variables, 
                     operationName: executionRequest.operationName)
         return result
-//        promise.succeed(result: result)
-//        promise.succeed(result: try graphql(
-//          queryStrategy: ConcurrentDispatchFieldExecutionStrategy(dispatchQueue: self.dispatchQueue),
-//          subscriptionStrategy: ConcurrentDispatchFieldExecutionStrategy(dispatchQueue: self.dispatchQueue),
-//          schema: schema,
-//          request: executionRequest.query,
-//          rootValue: rootValue,
-//          context: context,
-//          variableValues: executionRequest.variables,
-//          operationName: executionRequest.operationName)
-//        )
       } catch let e as GraphQLError {
         let graphQLError: [String: Map] = [
                   "data": [
@@ -76,18 +51,9 @@ public struct HTTPGraphQL: GraphQLService {
                 ]
         let map = Map.dictionary(graphQLError)
         return req.future(map)
-//        promise.succeed(result: [
-//          "data": [
-//            "errors": [e.map]
-//          ]
-//        ])
       } catch let e {
-        fatalError("\(e)")
-//        return req.future(Map.
-//        promise.fail(error: e)
+        return req.future(error: e)
       }
-//    }
-//    return promise.futureResult
   }
   
 }

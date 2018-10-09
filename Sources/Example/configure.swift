@@ -4,7 +4,7 @@ import StarWars
 
 /// Called before your application initializes.
 public func configure(_ config: inout Config, _ env: inout Vapor.Environment, _ services: inout Services) throws {
-    let httpGraphQL = HTTPGraphQL { req -> ExecutionContext in
+    let httpGraphQL = HTTPGraphQL() { req -> ExecutionContext in
         return (
             schema: starWarsSchema,
             rootValue: Void(),
@@ -15,7 +15,7 @@ public func configure(_ config: inout Config, _ env: inout Vapor.Environment, _ 
     
     /// Register routes to the router
     let router = EngineRouter.default()
-    let graphQLRouteCollection = GraphQLRouteCollection()
+    let graphQLRouteCollection = GraphQLRouteCollection(enableGraphiQL: true)
     try graphQLRouteCollection.boot(router: router)
     try routes(router)
     services.register(router, as: Router.self)
