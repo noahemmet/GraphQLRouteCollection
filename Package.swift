@@ -9,6 +9,9 @@ let package = Package(
         .library(
             name: "VaporGraphQL",
             targets: ["VaporGraphQL"]),
+        .executable(
+            name: "VaporGraphQLExample",
+            targets: ["Example"])
     ],
     dependencies: [
         .package(url: "https://github.com/vapor/vapor.git", .upToNextMajor(from: "3.0.0")),
@@ -22,5 +25,8 @@ let package = Package(
         .testTarget(
             name: "VaporGraphQLTests",
             dependencies: ["VaporGraphQL"]),
+        .target(
+            name: "Example",
+            dependencies: ["VaporGraphQL", "Vapor", "GraphQL", "Graphiti"]),
     ]
 )
