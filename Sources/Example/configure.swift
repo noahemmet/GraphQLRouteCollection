@@ -7,8 +7,8 @@ public func configure(_ config: inout Config, _ env: inout Vapor.Environment, _ 
     let httpGraphQL = HTTPGraphQL() { req -> ExecutionContext in
         return (
             schema: starWarsSchema,
-            rootValue: Void(),
-            context: Void()
+            rootValue: [:],
+            context: req
         )
     }
     services.register(httpGraphQL, as: GraphQLService.self)
