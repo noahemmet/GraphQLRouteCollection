@@ -4,24 +4,35 @@
 import PackageDescription
 
 let package = Package(
-    name: "GraphQLRouteCollection",
+    name: "VaporGraphQL",
     products: [
         .library(
-            name: "GraphQLRouteCollection",
-            targets: ["GraphQLRouteCollection"]),
+            name: "VaporGraphQL",
+            targets: ["VaporGraphQL"]),
+        .library(
+            name: "StarWars",
+            targets: ["StarWars"]),
+        .executable(
+            name: "Example",
+            targets: ["Example"])
     ],
     dependencies: [
-        .package(url: "https://github.com/vapor/vapor.git", .upToNextMajor(from: "2.1.0")),
-        .package(url: "https://github.com/GraphQLSwift/GraphQL.git", .upToNextMajor(from: "0.3.1"))
+        .package(url: "https://github.com/vapor/vapor.git", .upToNextMajor(from: "3.0.0")),
+        .package(url: "https://github.com/noahemmet/GraphQL.git", .branch("swift-42")),
+        .package(url: "https://github.com/noahemmet/Graphiti.git", .branch("swift-42")),
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
-            name: "GraphQLRouteCollection",
-            dependencies: ["Vapor", "GraphQL"]),
+            name: "VaporGraphQL",
+            dependencies: ["Vapor", "GraphQL", "Graphiti"]),
+        .target(
+            name: "StarWars",
+            dependencies: ["Vapor", "GraphQL", "Graphiti"]),
+        .target(
+            name: "Example",
+            dependencies: ["VaporGraphQL", "StarWars", "Vapor", "GraphQL", "Graphiti"]),
         .testTarget(
-            name: "GraphQLRouteCollectionTests",
-            dependencies: ["GraphQLRouteCollection"]),
+            name: "VaporGraphQLTests",
+            dependencies: ["VaporGraphQL", "StarWars"]),
     ]
 )
