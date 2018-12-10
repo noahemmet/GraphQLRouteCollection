@@ -96,6 +96,10 @@ You can also enable it for the route collection:
 GraphQLRouteCollection(enableGraphiQL: true)
 ```
 
+## Example
+
+You can see a [live example here](https://graphql-star-wars.v2.vapor.cloud/graphiql). The source app is located in the [`Sources/Example` directory](https://github.com/noahemmet/GraphQLRouteCollection/tree/master/Sources/Example), and there is a [`web.Dockerfile`](https://github.com/noahemmet/GraphQLRouteCollection/blob/master/web.Dockerfile) used by the host, [Vapor Cloud v2](https://dashboard.v2.vapor.cloud).
+
 ## License
 
 This project is released under the MIT license. See [LICENSE](LICENSE) for details.
