@@ -2,12 +2,21 @@
   "object": {
     "pins": [
       {
+        "package": "AnyCodable",
+        "repositoryURL": "https://github.com/Flight-School/AnyCodable",
+        "state": {
+          "branch": "master",
+          "revision": "e2b8834f3dc16dc0c48e706d053b60e1042d25eb",
+          "version": null
+        }
+      },
+      {
         "package": "Console",
         "repositoryURL": "https://github.com/vapor/console.git",
         "state": {
           "branch": null,
-          "revision": "5b9796d39f201b3dd06800437abd9d774a455e57",
-          "version": "3.0.2"
+          "revision": "d6cf07af59ae63cd95c4b5f98cf1f25627750fd1",
+          "version": "3.1.0"
         }
       },
       {
@@ -17,6 +26,15 @@
           "branch": null,
           "revision": "96ce86ebf9198328795c4b9cb711489460be083c",
           "version": "3.4.4"
+        }
+      },
+      {
+        "package": "CRuntime",
+        "repositoryURL": "https://github.com/noahemmet/CRuntime.git",
+        "state": {
+          "branch": null,
+          "revision": "f2a282f1b8ac204f4143b31a6490ad1d66612be5",
+          "version": "1.0.0"
         }
       },
       {
@@ -50,8 +68,8 @@
         "package": "GraphQL",
         "repositoryURL": "https://github.com/noahemmet/GraphQL.git",
         "state": {
-          "branch": "spm",
-          "revision": "9963dc1ca36d6a1353748ab74a5acffdc31aa58b",
+          "branch": "master",
+          "revision": "5fb507ec3c1fa126e1e170cc5caaea4cf0c8cb95",
           "version": null
         }
       },
@@ -60,8 +78,8 @@
         "repositoryURL": "https://github.com/vapor/http.git",
         "state": {
           "branch": null,
-          "revision": "272b22be8cb3364e42a4701c2e0676e37480ec5a",
-          "version": "3.1.5"
+          "revision": "6973bf50dab8dd00e4daf8cb82ca72b33f5db016",
+          "version": "3.1.6"
         }
       },
       {
@@ -86,8 +104,8 @@
         "package": "Runtime",
         "repositoryURL": "https://github.com/noahemmet/Runtime.git",
         "state": {
-          "branch": "swift-env",
-          "revision": "c281655e4d5e29c12dbcb8c51b11c158796464aa",
+          "branch": "master",
+          "revision": "38f34139226e8f007e8f582c43fcbe6a732346ec",
           "version": null
         }
       },
@@ -105,8 +123,8 @@
         "repositoryURL": "https://github.com/apple/swift-nio.git",
         "state": {
           "branch": null,
-          "revision": "176dd6e8564d60e936b76f3a896d667ae3acba31",
-          "version": "1.10.0"
+          "revision": "a20e129c22ad00a51c902dca54a5456f90664780",
+          "version": "1.12.0"
         }
       },
       {
@@ -141,8 +159,8 @@
         "repositoryURL": "https://github.com/vapor/template-kit.git",
         "state": {
           "branch": null,
-          "revision": "db35b1c35aabd0f5db3abca0cfda7becfe9c43e2",
-          "version": "1.1.0"
+          "revision": "aff2d6fc65bfd04579b0201b31a8d6720239c1cf",
+          "version": "1.1.1"
         }
       },
       {
@@ -159,8 +177,8 @@
         "repositoryURL": "https://github.com/vapor/validation.git",
         "state": {
           "branch": null,
-          "revision": "156f8adeac3440e868da3757777884efbc6ec0cc",
-          "version": "2.1.0"
+          "revision": "4de213cf319b694e4ce19e5339592601d4dd3ff6",
+          "version": "2.1.1"
         }
       },
       {
