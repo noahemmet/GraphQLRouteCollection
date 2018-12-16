@@ -15,9 +15,13 @@ extension Map: Codable {
       self = .double(value)
     } else if let value = try? container.decode(String.self) {
       self = .string(value)
-    } else {
-      self = .null
-    }
+	} else if let value = try? container.decode([Map].self) {
+	  self = .array(value)
+	} else if let value = try? container.decode([String: Map].self) {
+	  self = .dictionary(value)
+	} else {
+	  self = .null
+	}
   }
   
   public func encode(to encoder: Encoder) throws {
