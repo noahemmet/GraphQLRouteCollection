@@ -1,5 +1,6 @@
 import Vapor
 import GraphQL
+import AnyCodable
 
 /// Request object to submit a graphql query to be executed. This is generated
 /// by vapor from an http request's payload.
