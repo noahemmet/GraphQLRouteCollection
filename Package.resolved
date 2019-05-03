@@ -48,10 +48,10 @@
       },
       {
         "package": "Graphiti",
-        "repositoryURL": "https://github.com/GraphQLSwift/Graphiti.git",
+        "repositoryURL": "https://github.com/noahemmet/Graphiti.git",
         "state": {
           "branch": "master",
-          "revision": "4d3ceae27b848321ed670022a1052ae583554150",
+          "revision": "1ae3ad5bf03de4ba1616d1b39e9a2167e74a6439",
           "version": null
         }
       },
@@ -177,8 +177,8 @@
         "repositoryURL": "https://github.com/vapor/vapor.git",
         "state": {
           "branch": null,
-          "revision": "157d3b15336caa882662cc75024dd04b2e225246",
-          "version": "3.1.0"
+          "revision": "c86ada59b31c69f08a6abd4f776537cba48d5df6",
+          "version": "3.3.0"
         }
       },
       {
