@@ -19,7 +19,7 @@ let package = Package(
     dependencies: [
 		.package(url: "https://github.com/vapor/vapor.git", .upToNextMajor(from: "3.3.0")),
         .package(url: "https://github.com/GraphQLSwift/GraphQL.git", .branch("master")),
-        .package(url: "https://github.com/noahemmet/Graphiti.git", .branch("master")),
+        .package(url: "https://github.com/noahemmet/Graphiti.git", .branch("0.9.0")), // note this is a branch
     ],
     targets: [
         .target(
