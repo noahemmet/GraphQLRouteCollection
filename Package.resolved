@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/vapor/core.git",
         "state": {
           "branch": null,
-          "revision": "2731f8ba0cf274a61c9bd6ab43550f692ffaf879",
-          "version": "3.9.0"
+          "revision": "c64f63cb21631010952f7abfef719d376ab6a441",
+          "version": "3.9.1"
         }
       },
       {
@@ -50,17 +50,17 @@
         "package": "Graphiti",
         "repositoryURL": "https://github.com/noahemmet/Graphiti.git",
         "state": {
-          "branch": "master",
-          "revision": "1ae3ad5bf03de4ba1616d1b39e9a2167e74a6439",
+          "branch": "0.9.0",
+          "revision": "8852e647d7028aa516387ed43d81f390977451af",
           "version": null
         }
       },
       {
         "package": "GraphQL",
-        "repositoryURL": "https://github.com/GraphQLSwift/GraphQL.git",
+        "repositoryURL": "https://github.com/noahemmet/GraphQL.git",
         "state": {
-          "branch": "master",
-          "revision": "1c9e24fa43f26826fc2d42d875f8fe611d25bf35",
+          "branch": "swift5-1",
+          "revision": "64b0b607023290204baebb063efe6eb99e98401a",
           "version": null
         }
       },
@@ -95,9 +95,9 @@
         "package": "Runtime",
         "repositoryURL": "https://github.com/wickwirew/Runtime.git",
         "state": {
-          "branch": null,
-          "revision": "c167476b07fe8cc65fdf064076a4081c3269d14a",
-          "version": "2.1.0"
+          "branch": "master",
+          "revision": "bc4d680429fcc02fb825bf5eb45eddfa18aa9885",
+          "version": null
         }
       },
       {
@@ -150,8 +150,8 @@
         "repositoryURL": "https://github.com/vapor/template-kit.git",
         "state": {
           "branch": null,
-          "revision": "121ae51433df94cf6e15c09e1f1b0f7c77ff8d5c",
-          "version": "1.2.0"
+          "revision": "51405c83e95e8adb09565278a5e9b959c605e56c",
+          "version": "1.4.0"
         }
       },
       {
