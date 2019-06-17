@@ -1,6 +1,5 @@
 import Vapor
 import GraphQL
-import Graphiti
 
 public typealias ExecutionContext = (
   schema: GraphQLSchema,

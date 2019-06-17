@@ -47,15 +47,6 @@
         }
       },
       {
-        "package": "Graphiti",
-        "repositoryURL": "https://github.com/noahemmet/Graphiti.git",
-        "state": {
-          "branch": "0.9.0",
-          "revision": "8852e647d7028aa516387ed43d81f390977451af",
-          "version": null
-        }
-      },
-      {
         "package": "GraphQL",
         "repositoryURL": "https://github.com/noahemmet/GraphQL.git",
         "state": {
