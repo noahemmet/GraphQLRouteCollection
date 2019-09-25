@@ -13,7 +13,7 @@ public protocol GraphQLService: Service {
 public extension GraphQLService {
   
   /// Executes graphql from either POST or GET requests.
-  public func execute(_ req: Request) throws -> Future<Map> {
+  func execute(_ req: Request) throws -> Future<Map> {
     if req.http.method == .GET {
       return try self.executeGet(req)
     } else if req.http.method == .POST {

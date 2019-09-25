@@ -11,11 +11,11 @@ func urlEncode(_ stringToEncode: String) -> String {
 
 func createHTTPGraphQL() -> HTTPGraphQL {
   return HTTPGraphQL() { req in
-    (
-      schema: StarWarsSchema,
-      rootValue: [:],
-      context: req
-    )
+		req.future((
+			schema: starWarsSchema,
+			rootValue: [:],
+			context: req
+		))
   }
 }
 
