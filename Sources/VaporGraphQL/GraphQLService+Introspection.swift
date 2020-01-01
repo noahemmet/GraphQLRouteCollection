@@ -19,6 +19,7 @@ query IntrospectionQuery {
     directives {
       name
       description
+      locations
       args {
         ...InputValue
       }
