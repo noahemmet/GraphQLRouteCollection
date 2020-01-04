@@ -11,21 +11,21 @@ func urlEncode(_ stringToEncode: String) -> String {
 
 func createHTTPGraphQL() -> HTTPGraphQL {
   return HTTPGraphQL() { req in
-		req.future((
+		(
 			schema: starWarsSchema,
 			rootValue: [:],
 			context: req
-		))
+		)
   }
 }
 
-func performRequest(httpRequest: HTTPRequest) throws -> Map {
+func performRequest(httpRequest: HTTPRequest) throws -> GraphQLResult {
   let collection = createHTTPGraphQL()
   let request = Request(http: httpRequest, using: try Application())
   return try collection.execute(request).wait()
 }
 
-func performGETRequest(query: String, variables: [String:Any]? = nil, operationName: String? = nil) throws -> Map {
+func performGETRequest(query: String, variables: [String:Any]? = nil, operationName: String? = nil) throws -> GraphQLResult {
   var urlComponents = URLComponents(string: "http://localhost:8080/graphql")!
   var queryItems = [URLQueryItem]()
   queryItems.append(URLQueryItem(name: "query", value: query))
@@ -45,7 +45,7 @@ func performGETRequest(query: String, variables: [String:Any]? = nil, operationN
   return try performRequest(httpRequest: httpRequest)
 }
 
-func performPOSTRequest(query: String, variables: [String:Any] = [:], operationName: String? = nil) throws -> Map {
+func performPOSTRequest(query: String, variables: [String:Any] = [:], operationName: String? = nil) throws -> GraphQLResult {
   var json: [String: Any] = [
     "query": query,
     "variables": variables
@@ -73,14 +73,12 @@ class HTTPGraphQLTests: XCTestCase {
         }
       }
     """;
-    let expected: Map = [
-      "data": [
-        "hero": [
-          "id": "2001",
-          "name": "R2-D2"
-        ]
+    let expected = GraphQLResult(data: [
+      "hero": [
+        "id": "2001",
+        "name": "R2-D2"
       ]
-    ]
+    ])
     let result = try performGETRequest(query: query)
     XCTAssertEqual(result, expected)
   }
@@ -95,14 +93,12 @@ class HTTPGraphQLTests: XCTestCase {
       }
     """;
     let variables = ["episode": "EMPIRE"]
-    let expected: Map = [
-      "data": [
-        "hero": [
-          "id": "1000",
-          "name": "Luke Skywalker"
-        ]
+    let expected = GraphQLResult(data: [
+      "hero": [
+        "id": "1000",
+        "name": "Luke Skywalker"
       ]
-    ]
+    ])
     let result = try performGETRequest(query: query, variables: variables)
     XCTAssertEqual(result, expected)
   }
@@ -116,14 +112,12 @@ class HTTPGraphQLTests: XCTestCase {
         }
       }
     """;
-    let expected: Map = [
-      "data": [
-        "hero": [
-          "id": "2001",
-          "name": "R2-D2"
-        ]
+    let expected = GraphQLResult(data: [
+      "hero": [
+        "id": "2001",
+        "name": "R2-D2"
       ]
-    ]
+    ])
     let result = try performPOSTRequest(query: query)
     XCTAssertEqual(result, expected)
   }
@@ -138,14 +132,12 @@ class HTTPGraphQLTests: XCTestCase {
       }
     """;
     let variables = ["episode": "EMPIRE"]
-    let expected: Map = [
-      "data": [
-        "hero": [
-          "id": "1000",
-          "name": "Luke Skywalker"
-        ]
+    let expected = GraphQLResult(data: [
+      "hero": [
+        "id": "1000",
+        "name": "Luke Skywalker"
       ]
-    ]
+    ])
     let result = try performPOSTRequest(query: query, variables: variables)
     XCTAssertEqual(result, expected)
   }

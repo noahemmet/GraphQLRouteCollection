@@ -27,7 +27,7 @@ public struct HTTPGraphQL: GraphQLService {
     self.enableIntrospection = enableIntrospection
   }
   
-  public func execute(_ executionRequest: GraphQLExecutionRequest, for req: Request) -> Future<Map> {
+  public func execute(_ executionRequest: GraphQLExecutionRequest, for req: Request) -> Future<GraphQLResult> {
     if executionRequest.query == "" && executionRequest.variables.isEmpty && self.enableIntrospection {
       return self.executeIntrospectionQuery(for: req)
     }
@@ -42,14 +42,14 @@ public struct HTTPGraphQL: GraphQLService {
                     variableValues: executionRequest.variables, 
                     operationName: executionRequest.operationName)
         return result
-      } catch let e as GraphQLError {
-        let graphQLError: [String: Map] = [
-                  "data": [
-                    "errors": [e.map]
-                  ]
-                ]
-        let map = Map.dictionary(graphQLError)
-        return req.future(map)
+      } catch let error as GraphQLError {
+//        let graphQLError: [String: Map] = [
+//                  "data": [
+//                    "errors": [e]
+//                  ]
+//                ]
+        let result = GraphQLResult(data: nil, errors: [error])
+        return req.future(result)
       } catch let e {
         return req.future(error: e)
       }

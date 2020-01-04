@@ -93,7 +93,7 @@ fragment TypeRef on __Type {
 extension GraphQLService {
   
   /// Returns an introspection of the GraphQL schema.
-  public func executeIntrospectionQuery(for req: Request) -> Future<Map> {
+  public func executeIntrospectionQuery(for req: Request) -> Future<GraphQLResult> {
     return self.execute(
       GraphQLExecutionRequest(query: introspectionQuery, variables: [:], operationName: nil),
       for: req

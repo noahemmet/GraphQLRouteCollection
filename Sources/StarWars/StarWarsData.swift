@@ -5,7 +5,7 @@ import GraphQL
  * https://github.com/GraphQLSwift/GraphQL/blob/master/Tests/GraphQLTests/StarWarsTests/StarWarsData.swift
  */
 
-enum Episode : String {
+enum Episode : String, Encodable {
     case newHope = "NEWHOPE"
     case empire = "EMPIRE"
     case jedi = "JEDI"
@@ -26,7 +26,7 @@ protocol Character {
     var appearsIn: [Episode] { get }
 }
 
-struct Human : Character {
+struct Human : Character, Encodable {
     let id: String
     let name: String
     let friends: [String]
@@ -42,7 +42,7 @@ struct Human : Character {
     }
 }
 
-struct Droid : Character {
+struct Droid : Character, Encodable {
     let id: String
     let name: String
     let friends: [String]

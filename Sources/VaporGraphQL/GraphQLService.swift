@@ -6,14 +6,14 @@ import GraphQL
 public protocol GraphQLService: Service {
   
   /// Execute a graphql request.
-  func execute(_ executionRequest: GraphQLExecutionRequest, for req: Request) -> Future<Map>
+  func execute(_ executionRequest: GraphQLExecutionRequest, for req: Request) -> Future<GraphQLResult>
   
 }
 
 public extension GraphQLService {
   
   /// Executes graphql from either POST or GET requests.
-  func execute(_ req: Request) throws -> Future<Map> {
+  func execute(_ req: Request) throws -> Future<GraphQLResult> {
     if req.http.method == .GET {
       return try self.executeGet(req)
     } else if req.http.method == .POST {
@@ -22,16 +22,16 @@ public extension GraphQLService {
     throw Abort(.methodNotAllowed)
   }
   
-  private func executeGet(_ req: Request) throws -> Future<Map> {
+  private func executeGet(_ req: Request) throws -> Future<GraphQLResult> {
     return try self.execute(
       GraphQLExecutionRequest(url: req.http.url),
       for: req
     )
   }
   
-  private func executePost(_ req: Request) throws -> Future<Map> {
+  private func executePost(_ req: Request) throws -> Future<GraphQLResult> {
     return try req.content.decode(GraphQLExecutionRequest.self)
-      .then { executionRequest -> Future<Map> in
+      .then { executionRequest -> Future<GraphQLResult> in
         self.execute(
           executionRequest,
           for: req

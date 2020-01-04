@@ -28,7 +28,7 @@ public struct GraphQLRouteCollection: RouteCollection {
     }
   }
 
-  private func execute(_ req: Request) throws -> Future<Map> {
+  private func execute(_ req: Request) throws -> Future<GraphQLResult> {
     let graphql = try req.make(GraphQLService.self)
     return try graphql.execute(req)
   }
