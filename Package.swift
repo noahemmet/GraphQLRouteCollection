@@ -18,7 +18,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/vapor/vapor.git", .upToNextMajor(from: "3.3.0")),
-        .package(url: "https://github.com/GraphQLSwift/GraphQL.git", .upToNextMajor(from: "0.12.0")),
+        // Forked from https://github.com/GraphQLSwift/GraphQL
+      .package(url: "https://github.com/alexsteinerde/GraphQL.git", .branch("master")),
     ],
     targets: [
         .target(
